@@ -9,12 +9,22 @@
 
 (function () {
   let remind_later;
-  let timeout = 60 * 1000;
+  let timeout_orig = 60 * 1000;
+  let timeout = timeout_orig;
   let timeout_limit = 5 * 1000;
   
   function reminder()
   {
-    if (prompt("真的要刷知乎吗？\n输入 yes 来继续刷知乎。") != "yes") {
+    let s = prompt("真的要刷知乎吗？\n输入 yes 来继续刷知乎。");
+    if (s == "reset") {
+      if (prompt("真的要重置计时器吗？") == "reset" && prompt("你的良心不会痛吗？") == "reset") {
+        timeout = timeout_orig;
+        remind_later();
+      } else {
+        reminder();
+        return;
+      }
+    } else if (s != "yes") {
       window.location.href = "about:blank";
     } else {
       remind_later();
@@ -32,3 +42,4 @@
   
   reminder();
 })();
+
