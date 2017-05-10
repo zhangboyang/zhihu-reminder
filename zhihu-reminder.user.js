@@ -16,8 +16,15 @@
   function reminder()
   {
     let s = prompt("真的要刷知乎吗？\n输入 yes 来继续刷知乎。");
-    if (s == "reset") {
-      if (prompt("真的要重置计时器吗？") == "reset" && prompt("你的良心不会痛吗？") == "reset") {
+    if (s == "disable") {
+      if (prompt("真的要禁用计时器吗？") == "disable" && prompt("你的良心不会痛吗？") == "disable") {
+        // do nothing
+      } else {
+        reminder();
+        return;
+      }
+    } else if (s == "reset") {
+      if (prompt("真的要重置计时器吗？") == "reset") {
         timeout = timeout_orig;
         remind_later();
       } else {
